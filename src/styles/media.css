@@ -1,0 +1,143 @@
+/* ==============INDEX======================= */
+@media (min-width: 1200px) {
+  .news-body {
+    flex-direction: row-reverse;
+    flex-wrap: nowrap;
+  }
+  .news-content {
+    flex: 0 1 auto;
+    margin: 33px 70px 33px 0;
+  }
+}
+
+@media (max-width: 1200px) {
+  .catalog-item {
+    flex: 0 1 46%;
+    justify-content: center;
+  }
+  .catalog-item-catalog {
+    flex: 0 1 30%;
+    margin: 0 auto;
+  }
+  .second-column-diagonal,
+  .promo-arrow {
+    display: none;
+  }
+  .news-img img {
+    max-width: 100%;
+  }
+}
+@media (max-width: 992px) {
+  .first-column-catalog {
+    padding: 0;
+  }
+  .page-show {
+    padding: 50px 0 60px 0;
+  }
+  .first {
+    padding: 30px 40px;
+    text-align: center;
+  }
+  .color-list,
+  .size-list {
+    justify-content: center;
+  }
+
+  .page-similar {
+    padding: 80px 0;
+  }
+}
+@media (max-width: 895px) {
+}
+@media (max-width: 797px) {
+  .first-column-catalog {
+    padding: 0;
+  }
+  .page-news {
+    padding: 70px 0 0 0;
+  }
+  .page-categories {
+    padding: 70px 0 0 0;
+  }
+  .first-column-title {
+    margin: 0 0 20px 0;
+  }
+  .first-column-list {
+    justify-content: center;
+  }
+  .second-column-catalog {
+    display: flex;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 695px) {
+  .slider-image-main img {
+    max-width: 100%;
+  }
+}
+@media (max-width: 603px) {
+  .catalog-item {
+    flex: 0 1 100%;
+    justify-content: center;
+  }
+  .header-block {
+    margin: 0 0 30px 0;
+  }
+}
+
+@media (max-width: 499px) {
+  .header-menu {
+    flex: 0 1 100%;
+    margin: 0 0 15px 0;
+  }
+  .menu-list {
+    justify-content: center;
+  }
+  .menu-link {
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 118%;
+    color: var(--main-color-black);
+  }
+  .header-logo {
+    flex: 0 1 100%;
+    margin: 0 0 15px 0;
+    text-align: center;
+    display: block;
+  }
+  .header-logo img {
+    height: 20px;
+  }
+  .header-navigation {
+    flex: 0 1 100%;
+    margin: 0 0 15px 0;
+  }
+  .navigation-list {
+    justify-content: center;
+  }
+  .navigation-link img {
+    width: 22px;
+    height: 22px;
+  }
+  .news-title {
+    font-size: 20px;
+  }
+  .news-text {
+    font-size: 14px;
+  }
+  .news-content {
+    padding: 15px 10px;
+  }
+  .header-block-title {
+    font-size: 26px;
+  }
+}
+@media (max-width: 366px) {
+  .header-block-title {
+    font-size: 20px;
+  }
+  .slider {
+    margin: 0 30px;
+  }
+}
