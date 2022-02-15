@@ -45,7 +45,7 @@
     <footer class="footer">
       <div class="footer-container container">
         <router-link class="footer-logo" to="/"
-          ><img src="./assets/footer/Nîmes footer.png" alt="logo"
+          ><img src="./assets/footer/Nîmes_footer.png" alt="logo"
         /></router-link>
         <nav class="footer-nav">
           <ul class="footer-list">
@@ -92,11 +92,7 @@
               alt="twitter"
           /></router-link>
         </div>
-        <div
-          :key="social"
-          v-for="(social, index) in socialArray"
-          class="footer-leave"
-        >
+        <div :key="social" v-for="social in socialArray" class="footer-leave">
           <div v-if="isLeaveSite" class="footer-leave-window">
             <p>
               Вы уверены, что хотите покинуть сайт и перейти на

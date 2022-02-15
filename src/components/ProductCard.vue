@@ -54,13 +54,19 @@
             <div class="body-column-second second">
               <div class="second-slider slider">
                 <div class="slider-image-main">
-                  <img src="../assets/Card/main card.jpg" alt="main card" />
+                  <img
+                    :src="miniSliderImgArray[0].url"
+                    :alt="miniSliderImgArray[0].alt"
+                  />
                 </div>
                 <div class="slider-image-mini">
-                  <img src="../assets/Card/card 1.jpg" alt="card-mini" />
-                  <img src="../assets/Card/card 2.jpg" alt="card-mini" />
-                  <img src="../assets/Card/card 3.jpg" alt="card-mini" />
-                  <img src="../assets/Card/card 4.jpg" alt="card-mini" />
+                  <img
+                    @click="changeImgSlider(image)"
+                    :key="image.id"
+                    v-for="image in miniSliderImg"
+                    :src="getUrlMini(image.url)"
+                    :alt="image.alt"
+                  />
                 </div>
 
                 <img
@@ -127,6 +133,37 @@
     </main>
   </div>
 </template>
+
+<script>
+let miniSliderImgArray = [
+  { id: 1, url: 'main_card.jpg', alt: 'main-card' },
+  { id: 1, url: 'main_card.jpg', alt: 'card-mini' },
+  { id: 2, url: 'card_2.jpg', alt: 'card-mini' },
+  { id: 3, url: 'card_3.jpg', alt: 'card-mini' },
+  { id: 4, url: 'card_4.jpg', alt: 'card-mini' },
+];
+
+export default {
+  data() {
+    return {
+      mainSliderImg: miniSliderImgArray[0].url,
+
+      miniSliderImg: miniSliderImgArray,
+    };
+  },
+  computed: {
+    changeImgSlider(img) {
+      console.log(mainSliderImg);
+      this.mainSliderImg = img;
+    },
+  },
+  methods: {
+    getUrlMini(img) {
+      return new URL('../assets/Card/' + img, import.meta.url).href;
+    },
+  },
+};
+</script>
 
 <style scoped>
 .page-card {
