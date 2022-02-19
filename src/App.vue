@@ -67,47 +67,31 @@
           </ul>
         </nav>
         <div class="footer-social social">
-          <router-link class="social-item" to="/"
+          <router-link
+            :key="icon"
+            v-for="icon in socialIcon"
+            class="social-item"
+            to="/"
             ><img
               @click="leaveSite"
-              src="./assets/footer/facebook.png"
-              alt="facebook"
-          /></router-link>
-          <router-link class="social-item" to="/"
-            ><img
-              @click="leaveSite"
-              src="./assets/footer/inst.png"
-              alt="instagramm"
-          /></router-link>
-          <router-link class="social-item" to="/"
-            ><img
-              @click="leaveSite"
-              src="./assets/footer/p.png"
-              alt="pinterest"
-          /></router-link>
-          <router-link class="social-item" to="/"
-            ><img
-              @click="leaveSite"
-              src="./assets/footer/twitter.png"
-              alt="twitter"
-          /></router-link>
-        </div>
-        <div :key="social" v-for="social in socialArray" class="footer-leave">
-          <div v-if="isLeaveSite" class="footer-leave-window">
-            <p>
-              Вы уверены, что хотите покинуть сайт и перейти на
-              {{ social }}?
-            </p>
-            <div class="footer-leave-window-agree button">
-              <a class="button-select" href="#">Подтвердить</a>
+              :src="getURLSocial(icon.url)"
+              :alt="icon.alt"
+            />
+          </router-link>
+          <div class="footer-leave">
+            <div v-if="isLeaveSite" class="footer-leave-window">
+              <p>Вы уверены, что хотите покинуть сайт и перейти на {{}}?</p>
+              <div class="footer-leave-window-agree button">
+                <a class="button-select" href="#">Подтвердить</a>
+              </div>
+              <button
+                @click="isLeaveSite = false"
+                class="footer-leave-window-close"
+                type="submit"
+              >
+                <img src="./assets/footer/close.png" alt="close" />
+              </button>
             </div>
-            <button
-              @click="isLeaveSite = false"
-              class="footer-leave-window-close"
-              type="submit"
-            >
-              <img src="./assets/footer/close.png" alt="close" />
-            </button>
           </div>
         </div>
       </div>
@@ -120,20 +104,27 @@ export default {
   data() {
     return {
       isVisibleSearch: false,
-      socialArray: [
-        'Facebook.com, Instagramm.com',
-        'Pinterest.com',
-        'Twitter.com',
-      ],
       isLeaveSite: false,
+      socialIcon: [
+        { url: 'facebook.png', alt: 'Facebook.com' },
+        { url: 'inst.png', alt: 'Instagramm.com' },
+        { url: 'pinterest.png', alt: 'Pinterest.com' },
+        { url: 'twitter.png', alt: 'Twitter.com' },
+      ],
     };
   },
   methods: {
+    getURLSocial(icon) {
+      return new URL('./assets/footer/' + icon, import.meta.url).href;
+    },
     searchString() {
       this.isVisibleSearch = !this.isVisibleSearch;
     },
     leaveSite() {
       this.isLeaveSite = !this.isLeaveSite;
+    },
+    message() {
+      for (let i = 0; i < this.socialIcon.length; i++) {}
     },
   },
 };

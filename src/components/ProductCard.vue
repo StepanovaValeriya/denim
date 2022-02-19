@@ -55,30 +55,34 @@
               <div class="second-slider slider">
                 <div class="slider-image-main">
                   <img
-                    :src="miniSliderImgArray[0].url"
-                    :alt="miniSliderImgArray[0].alt"
+                    :src="getUrlMini(mainSliderImg.url)"
+                    :alt="mainSliderImg.alt"
                   />
                 </div>
-                <div class="slider-image-mini">
-                  <img
-                    @click="changeImgSlider(image)"
-                    :key="image.id"
-                    v-for="image in miniSliderImg"
-                    :src="getUrlMini(image.url)"
-                    :alt="image.alt"
-                  />
-                </div>
+                <div>
+                  <div class="slider-image-mini">
+                    <img
+                      :key="index"
+                      v-for="(image, index) in miniSliderImg"
+                      @click="changeImgSlider(image)"
+                      :src="getUrlMini(image.url)"
+                      :alt="image.alt"
+                    />
+                  </div>
 
-                <img
-                  class="slider-arrow slider-arrow-left"
-                  src="../assets/Card/arrow left.svg"
-                  alt="arrow left"
-                />
-                <img
-                  class="slider-arrow slider-arrow-right"
-                  src="../assets/Card/arrow right.svg"
-                  alt="arrow right"
-                />
+                  <img
+                    @click="changeImgSliderArrowLeft"
+                    class="slider-arrow slider-arrow-left"
+                    src="../assets/Card/arrow left.svg"
+                    alt="arrow left"
+                  />
+                  <img
+                    @click="changeImgSliderArrowRight"
+                    class="slider-arrow slider-arrow-right"
+                    src="../assets/Card/arrow right.svg"
+                    alt="arrow right"
+                  />
+                </div>
               </div>
             </div>
           </div>
@@ -136,30 +140,41 @@
 
 <script>
 let miniSliderImgArray = [
-  { id: 1, url: 'main_card.jpg', alt: 'main-card' },
-  { id: 1, url: 'main_card.jpg', alt: 'card-mini' },
-  { id: 2, url: 'card_2.jpg', alt: 'card-mini' },
-  { id: 3, url: 'card_3.jpg', alt: 'card-mini' },
-  { id: 4, url: 'card_4.jpg', alt: 'card-mini' },
+  { id: 2, url: 'main_card.jpg', alt: 'card-mini' },
+  { id: 3, url: 'card_2.jpg', alt: 'card-mini' },
+  { id: 4, url: 'card_3.jpg', alt: 'card-mini' },
+  { id: 5, url: 'card_4.jpg', alt: 'card-mini' },
 ];
 
 export default {
   data() {
     return {
-      mainSliderImg: miniSliderImgArray[0].url,
-
+      mainSliderImg: miniSliderImgArray[0],
       miniSliderImg: miniSliderImgArray,
+      currentImg: 0,
     };
   },
-  computed: {
-    changeImgSlider(img) {
-      console.log(mainSliderImg);
-      this.mainSliderImg = img;
-    },
-  },
+  computed: {},
   methods: {
     getUrlMini(img) {
       return new URL('../assets/Card/' + img, import.meta.url).href;
+    },
+    changeImgSlider(img) {
+      return (this.mainSliderImg = img);
+    },
+    changeImgSliderArrowRight() {
+      if (this.currentImg >= this.miniSliderImg.length - 1) {
+        this.currentImg = this.miniSliderImg.length - 1;
+      } else {
+        this.currentImg++;
+      }
+    },
+    changeImgSliderArrowLeft() {
+      if (this.currentImg <= 0) {
+        this.currentImg = 0;
+      } else {
+        this.currentImg--;
+      }
     },
   },
 };
@@ -262,6 +277,8 @@ export default {
 }
 .slider-image-mini img {
   cursor: pointer;
+  min-width: 21%;
+  flex: 0 1 20%;
 }
 .slider-arrow {
   position: absolute;
