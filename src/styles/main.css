@@ -65,6 +65,10 @@ body {
 .page {
   flex: 1 1 auto;
 }
+.invalid {
+  border: 1px solid red !important;
+  color: red;
+}
 /* ======header============== */
 .header-container {
   display: flex;
@@ -95,7 +99,10 @@ body {
   gap: 35px;
   margin: 0 5px;
 }
-.navigation-link img {
+.navigation-item button {
+  background: none;
+}
+.navigation-item img {
   width: 18px;
   height: 18px;
 }

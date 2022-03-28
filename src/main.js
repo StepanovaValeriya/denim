@@ -1,5 +1,6 @@
 import { createApp } from 'vue';
 import { createRouter, createWebHashHistory } from 'vue-router';
+import store from './store';
 import App from './App.vue';
 import Index from './components/Index.vue';
 import Catalog from './components/Catalog.vue';
@@ -19,4 +20,4 @@ const router = createRouter({
   routes,
 });
 
-createApp(App).use(router).mount('#app');
+createApp(App).use(router).use(store).mount('#app');
