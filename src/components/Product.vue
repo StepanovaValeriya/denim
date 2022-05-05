@@ -1,70 +1,109 @@
 <template>
-  <div class="product-body">
-    <ul class="catalog-list">
-      <li class="catalog-item catalog-item-catalog">
-        <a class="catalog-item-link" href="#">
-          <h3>Jacket</h3>
-          <img src="../assets/Catalog/jacket catalog 1.jpg" alt="Jacket" />
-          <div class="catalog-item-price">$40</div>
-        </a>
-      </li>
-      <li class="catalog-item catalog-item-catalog">
-        <a class="catalog-item-link" href="#">
-          <h3>Jacket</h3>
-          <img src="../assets/Catalog/jacket catalog 2.jpg" alt="Jacket" />
-          <div class="catalog-item-price">$70</div>
-        </a>
-      </li>
-      <li class="catalog-item catalog-item-catalog">
-        <a class="catalog-item-link" href="#">
-          <h3>Jacket</h3>
-          <img src="../assets/Catalog/jacket catalog 3.jpg" alt="Jacket" />
-          <div class="catalog-item-price">$50</div>
-        </a>
-      </li>
-      <li class="catalog-item catalog-item-catalog">
-        <a class="catalog-item-link" href="#">
-          <h3>Jacket</h3>
-          <img src="../assets/Catalog/jacket catalog 4.jpg" alt="Jacket" />
-          <div class="catalog-item-price">$60</div>
-        </a>
-      </li>
-      <li class="catalog-item catalog-item-catalog">
-        <a class="catalog-item-link" href="#">
-          <h3>Jacket</h3>
-          <img src="../assets/Catalog/jacket catalog 5.jpg" alt="Jacket" />
-          <div class="catalog-item-price">$40</div>
-        </a>
-      </li>
-      <li class="catalog-item catalog-item-catalog">
-        <a class="catalog-item-link" href="#">
-          <h3>Jacket</h3>
-          <img src="../assets/Catalog/jacket catalog 6.jpg" alt="Jacket" />
-          <div class="catalog-item-price">$110</div>
-        </a>
-      </li>
-      <li class="catalog-item catalog-item-catalog">
-        <a class="catalog-item-link" href="#">
-          <h3>Jacket</h3>
-          <img src="../assets/Catalog/jacket catalog 7.jpg" alt="Jacket" />
-          <div class="catalog-item-price">$35</div>
-        </a>
-      </li>
-      <li class="catalog-item catalog-item-catalog">
-        <a class="catalog-item-link" href="#">
-          <h3>Jacket</h3>
-          <img src="../assets/Catalog/jacket catalog 8.jpg" alt="Jacket" />
-          <div class="catalog-item-price">$85</div>
-        </a>
-      </li>
-    </ul>
+  <div>
+    <div class="product-filter filter">
+      <select class="filter-list" name="filter-list">
+        <option value="1">Filter By</option>
+        <option value="2">Price</option>
+        <option value="3">Size</option>
+        <option value="4">Color</option>
+      </select>
+    </div>
+
+    <div class="product-body">
+      <ul class="catalog-list">
+        <router-link
+          v-for="(product, index) in products"
+          :key="index"
+          :to="product.url"
+          custom
+          v-slot="{ href, navigate, isExactActive }"
+        >
+          <li
+            :class="[isExactActive && 'active']"
+            class="catalog-item catalog-item-catalog"
+          >
+            <a @click="navigate" :href="href" class="catalog-item-link">
+              <h3>{{ product.title }}</h3>
+              <img :src="getURLImage(product.src)" :alt="product.alt" />
+              <div class="catalog-item-price">{{ product.price }}</div>
+            </a>
+          </li>
+        </router-link>
+      </ul>
+    </div>
+    <div class="page-show show">
+      <div class="show-container container">
+        <div class="show-text">Showing 9 of 45 items</div>
+        <div class="show-button button">
+          <a class="button-select" href="#">Load more</a>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
+<script>
+export default {
+  props: {
+    products: {
+      type: Array,
+    },
+  },
+  name: 'product',
+  data() {
+    return {};
+  },
+  methods: {
+    getURLImage(product) {
+      return new URL('../assets/Catalog/' + product, import.meta.url).href;
+    },
+  },
+};
+</script>
+
 <style scoped>
+.product-filter {
+  margin: 0 10px 40px 0;
+}
+.filter {
+  text-align: right;
+}
+.filter-list {
+  border: 2px solid #151c22;
+  padding: 18px 117px 18px 18px;
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 21px;
+  color: var(--main-color-black);
+}
 /* ==================product================= */
 
 .product-body {
   margin: 0 10px 0 10px;
+}
+/* ============show=============== */
+.page-show {
+  padding: 83px 0 130px 0;
+}
+.show-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.show-text {
+  font-size: 18px;
+  line-height: 21px;
+}
+.show-text:not(:last-child) {
+  margin-bottom: 50px;
+}
+.show-button {
+  padding: 27px 58px;
+}
+
+@media (max-width: 797px) {
+  .filter {
+    text-align: center;
+  }
 }
 </style>

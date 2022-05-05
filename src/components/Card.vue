@@ -27,20 +27,13 @@
           <div class="first-size size">
             <h4 class="size-title">Size</h4>
             <ul class="size-list">
-              <li class="size-item">
-                <a class="size-link" href="#">XS</a>
-              </li>
-              <li class="size-item">
-                <a class="size-link" href="#">S</a>
-              </li>
-              <li class="size-item">
-                <a class="size-link" href="#">M</a>
-              </li>
-              <li class="size-item">
-                <a class="size-link" href="#">L</a>
-              </li>
-              <li class="size-item">
-                <a class="size-link" href="#">XL</a>
+              <li
+                :class="{ active: size.isActive, 'size-item': true }"
+                v-for="size in sizes"
+                :key="size.id"
+                @click="activeElement(size)"
+              >
+                <a class="size-link">{{ size.title }}</a>
               </li>
             </ul>
           </div>
@@ -102,7 +95,13 @@ export default {
     return {
       mainSliderImg: miniSliderImgArray[0],
       miniSliderImg: miniSliderImgArray,
-      currentImg: 0,
+      sizes: [
+        { id: 1, title: 'XS' },
+        { id: 2, title: 'S' },
+        { id: 3, title: 'M' },
+        { id: 4, title: 'L' },
+        { id: 5, title: 'XL' },
+      ],
     };
   },
   computed: {},
@@ -114,18 +113,25 @@ export default {
       return (this.mainSliderImg = img);
     },
     changeImgSliderArrowRight() {
-      if (this.currentImg >= this.miniSliderImg.length - 1) {
-        this.currentImg = this.miniSliderImg.length - 1;
-      } else {
-        this.currentImg++;
+      let i = this.miniSliderImg.indexOf(this.mainSliderImg) + 1;
+      if (i >= this.miniSliderImg.length) {
+        i = this.miniSliderImg.length - 1;
       }
+      this.mainSliderImg = this.miniSliderImg[i];
     },
     changeImgSliderArrowLeft() {
-      if (this.currentImg <= 0) {
-        this.currentImg = 0;
-      } else {
-        this.currentImg--;
+      let j = this.miniSliderImg.indexOf(this.mainSliderImg) - 1;
+      console.log(j);
+      if (j < 0) {
+        j = 0;
       }
+      this.mainSliderImg = this.miniSliderImg[j];
+    },
+    activeElement(item) {
+      const active = this.sizes.find((i) => i.isActive);
+      active && (active.isActive = false);
+
+      item.isActive = !item.isActive;
     },
   },
 };
@@ -176,6 +182,9 @@ export default {
   width: 16px;
   height: 16px;
   cursor: pointer;
+}
+.active {
+  border: 1px solid black;
 }
 .color-link:active {
   border: 1px solid #b0c3c7;
