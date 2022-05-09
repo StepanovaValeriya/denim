@@ -6,7 +6,9 @@
           <p class="first-column-text">The quality you deserve</p>
           <h2 class="first-column-title">DENIM</h2>
           <div class="first-column-button button">
-            <a class="button-select" href="#">Check new collection</a>
+            <router-link class="button-select" to="/catalog"
+              >Check new collection</router-link
+            >
           </div>
         </div>
         <div class="promo-column second-column ibg">

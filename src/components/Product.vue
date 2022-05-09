@@ -1,11 +1,14 @@
 <template>
   <div>
     <div class="product-filter filter">
-      <select class="filter-list" name="filter-list">
-        <option value="1">Filter By</option>
-        <option value="2">Price</option>
-        <option value="3">Size</option>
-        <option value="4">Color</option>
+      <select
+        class="filter-list"
+        name="filter-list"
+        @change="sortPrice($event)"
+      >
+        <option value="0">Filter By</option>
+        <option value="1">По возрастанию цены</option>
+        <option value="2">По убыванию цены</option>
       </select>
     </div>
 
@@ -25,7 +28,7 @@
             <a @click="navigate" :href="href" class="catalog-item-link">
               <h3>{{ product.title }}</h3>
               <img :src="getURLImage(product.src)" :alt="product.alt" />
-              <div class="catalog-item-price">{{ product.price }}</div>
+              <div class="catalog-item-price">${{ product.price }}</div>
             </a>
           </li>
         </router-link>
@@ -33,9 +36,11 @@
     </div>
     <div class="page-show show">
       <div class="show-container container">
-        <div class="show-text">Showing 9 of 45 items</div>
+        <div class="show-text">
+          Showing {{ products.length }} of {{ products.length }} items
+        </div>
         <div class="show-button button">
-          <a class="button-select" href="#">Load more</a>
+          <a class="button-select"> Load more </a>
         </div>
       </div>
     </div>
@@ -53,7 +58,31 @@ export default {
   data() {
     return {};
   },
+
+  computed: {},
   methods: {
+    sortPrice(event) {
+      if (event.target.value === '1') {
+        this.products.sort(function (a, b) {
+          if (a.price > b.price) {
+            return 1;
+          }
+          if (a.price < b.price) {
+            return -1;
+          }
+        });
+      }
+      if (event.target.value === '2') {
+        this.products.sort(function (a, b) {
+          if (a.price > b.price) {
+            return -1;
+          }
+          if (a.price < b.price) {
+            return 1;
+          }
+        });
+      }
+    },
     getURLImage(product) {
       return new URL('../assets/Catalog/' + product, import.meta.url).href;
     },
