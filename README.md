@@ -1,7 +1,15 @@
-# Vue 3 + Vite
+# Denim
 
-This template should help get you started developing with Vue 3 in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+This is an educational project. It is an online clothing store. This is just a sample of what such a site might look like. The database is not used here. The project is released on Vue3.
 
-## Recommended IDE Setup
+## Getting Started
 
-- [VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=johnsoncodehk.volar)
+To run the project сlone it to your local machine and run it with the commands
+
+```
+npm install
+```
+```
+npm run preview
+```
+
